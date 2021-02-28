@@ -1,4 +1,11 @@
+<style>
+.blue {
+  color: blue;
+}
+</style>
+
 # Move Ball Exercise
+{: .blue}
 ___
 
 The Move Ball Exercise was an exercise that concluded the second week of the MIT xPRO Full Stack Developer Boot Camp. We drew from all the lessons from the week and created an object out of HTML and CSS and moved it around the screen.
