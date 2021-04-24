@@ -1,8 +1,18 @@
+//randomly generate numbers
+function randomize(limit) {
+    return Math.floor(Math.random() * limit)
+}
+
+function randoScale(min, max) {
+    console.log(min, max);
+    return Math.random() * (max - min) + min;
+}
+
 //introduce JS to HTML element ball
-var ball = document.getElementById('ball');
-var ballTwo = document.getElementById('ballTwo');
-let newHeight = Math.floor(Math.random() * (75 - 25) + 25);
-let newHeightTwo = Math.floor(Math.random() * (75 - 25) + 25);
+let ball = document.getElementById('ball');
+let ballTwo = document.getElementById('ballTwo');
+let newHeight = randoScale(50, 75);
+let newHeightTwo = randoScale(50, 75);
 
 //movement setup for ball - different velocities for different axis - check out different effects
 let velocityX = 10;
@@ -25,60 +35,24 @@ let reverseXTwo = false;
 let reverseYTwo = false;
 
 //randomly change properties when hitting sides of window of ball
-
 function colorChangeBall(){
-    let degreeDir = Math.floor(Math.random() * 360);
-    let redColor = Math.floor(Math.random() * 255);
-    let greenColor = Math.floor(Math.random() * 255);
-    let blueColor = Math.floor(Math.random() * 255);
-    let redColorB = Math.floor(Math.random() * 255);
-    let greenColorB = Math.floor(Math.random() * 255);
-    let blueColorB = Math.floor(Math.random() * 255);
-    newHeight = Math.floor(Math.random() * (75 - 25) + 25);
-    //let newWidth = Math.floor(Math.random() * (75 - 25) + 25);
-
-    //used this to randomly change borderRadius - wasn't impressed
-    //let newCurve = Math.floor(Math.random() * 50); 
-
-    ball.style.background = 'linear-gradient(' + degreeDir + 'deg, rgb(' + redColor + ',' + greenColor + ',' + blueColor + ' ), rgba(' + redColorB + ',' + greenColorB + ',' + blueColorB + ' ))';
+    newHeight = randoScale(25, 50);
+    ball.style.background = 'linear-gradient(' + randomize(360) + 'deg, rgb(' + randomize(255) + ',' + randomize(255) + ',' + randomize(255) + ' ), rgba(' + randomize(255) + ',' + randomize(255) + ',' + randomize(255) + ' ))';
     ball.style.height = newHeight;
     ball.style.width = newHeight;
-
-    //saved in case I want to use later
-    //ball.style.borderRadius = newCurve;
 };
 
-//randomly change properties when hitting sides of window of ballTwo
-function colorChangeBallTwo(){
-    let degreeDirTwo = Math.floor(Math.random() * 360);
-    let redColorTwo = Math.floor(Math.random() * 255);
-    let greenColorTwo = Math.floor(Math.random() * 255);
-    let blueColorTwo = Math.floor(Math.random() * 255);
-    let redColorBTwo = Math.floor(Math.random() * 255);
-    let greenColorBTwo = Math.floor(Math.random() * 255);
-    let blueColorBTwo = Math.floor(Math.random() * 255);
-    newHeightTwo = Math.floor(Math.random() * (75 - 25) + 25);
-    //let newWidthTwo = Math.floor(Math.random() * (75 - 25) + 25);
-
-    //saved in case I want to use later
-    //let newCurveTwo = Math.floor(Math.random() * 50);
-
-    ballTwo.style.background = 'linear-gradient(' + degreeDirTwo + 'deg, rgb(' + redColorTwo + ',' + greenColorTwo + ',' + blueColorTwo + ' ), rgba(' + redColorBTwo + ',' + greenColorBTwo + ',' + blueColorBTwo + ' ))';
+function colorChangeBallTwo() {
+    newHeightTwo = randoScale(25, 50);
+    ballTwo.style.background = 'linear-gradient(' + randomize(360) + 'deg, rgb(' + randomize(255) + ',' + randomize(255) + ',' + randomize(255) + ' ), rgba(' + randomize(255) + ',' + randomize(255) + ',' + randomize(255) + ' ))';
     ballTwo.style.height = newHeightTwo;
     ballTwo.style.width = newHeightTwo;
-
-    //saved in case I want to use later
-    //ballTwo.style.borderRadius = newCurveTwo;
-
 };
 
 //function to randomly change velocity 
 function speedChangeRandom(){
-    let newVelocityX = Math.floor(Math.random() * 50);
-    let newVelocityY = Math.floor(Math.random() * 50);
-
-    velocityX = newVelocityX;
-    velocityY = newVelocityY;
+    velocityX = randoScale(15, 30);
+    velocityY = randoScale(15, 30);
 };
 
 //function to move ball
@@ -88,17 +62,16 @@ function moveBall(){
     let windowHeight = window.innerHeight - newHeight;
     let windowWidth = window.innerWidth - newHeight;
 
-    const Xmin = 0;
-    const Xmax = windowWidth;
-    const Ymin = 0;
-    const Ymax = windowHeight;
+    let Xmin = 0;
+    let Xmax = windowWidth;
+    let Ymin = 0;
+    let Ymax = windowHeight;
 
    // logical NOT aka reverse the boolean value of reverse
     if( positionX > Xmax || positionX === Xmin || positionX < Xmin){ 
         reverseX = !reverseX;
         colorChangeBall();
     };
-
 
     if( positionY > Ymax || positionY === Ymin || positionY < Ymin){ 
         reverseY = !reverseY;  
@@ -136,10 +109,10 @@ function moveBallTwo(){
 let windowHeight = window.innerHeight - newHeightTwo;
 let windowWidth = window.innerWidth - newHeightTwo;
 
-const Xmin = 0;
-const Xmax = windowWidth;
-const Ymin = 0;
-const Ymax = windowHeight;
+let Xmin = 0;
+let Xmax = windowWidth;
+let Ymin = 0;
+let Ymax = windowHeight;
 
  // logical NOT aka reverse the boolean value of reverse
     if( positionXTwo > Xmax || positionXTwo === Xmin || positionXTwo < Xmin){ 
@@ -180,6 +153,3 @@ const Ymax = windowHeight;
 
 setInterval (moveBall, 100);
 setInterval (moveBallTwo, 100);
-
-//release the golden snitch - changes ball velocity randomly every 2 seconds
-//setInterval (speedChangeRandom, 2000);
