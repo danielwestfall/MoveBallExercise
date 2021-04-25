@@ -19,8 +19,6 @@ let velocityX = 10;
 let velocityY = 20;
 let positionX = 0;
 let positionY = 0;
-
-//movement setup for ballTwo - different velocities for different axis - check out different effects
 let velocityXTwo = 10;
 let velocityYTwo = 20;
 let positionXTwo = 0;
@@ -29,8 +27,6 @@ let positionYTwo = 0;
 //ball directions - separate reverse for the X and Y
 let reverseX = false;
 let reverseY = false;
-
-//ball directions for ballTwo- separate reverse for the X and Y
 let reverseXTwo = false;
 let reverseYTwo = false;
 
@@ -55,25 +51,31 @@ function speedChangeRandom(){
     velocityY = randoScale(15, 30);
 };
 
+    let Xmin = 0;
+    let Xmax = Math.round(window.innerWidth - (newHeight / 2));
+    let Ymin = 0;
+    let Ymax = Math.round(window.innerHeight - (newHeight / 2));
+    
+function recalcBounds(){
+    Xmax = Math.round(window.innerWidth - (newHeight / 2));
+    Ymax = Math.round(window.innerHeight - (newHeight / 2));
+    
+    return { Xmax, Ymax }
+};
+
 //function to move ball
 function moveBall(){
 
 //calculate window size to dynamically change boundaries 
-    let windowHeight = window.innerHeight - newHeight;
-    let windowWidth = window.innerWidth - newHeight;
 
-    let Xmin = 0;
-    let Xmax = windowWidth;
-    let Ymin = 0;
-    let Ymax = windowHeight;
-
+    recalcBounds();
    // logical NOT aka reverse the boolean value of reverse
-    if( positionX > Xmax || positionX === Xmin || positionX < Xmin){ 
+    if( positionX >= Xmax || positionX <= Xmin){ 
         reverseX = !reverseX;
         colorChangeBall();
     };
 
-    if( positionY > Ymax || positionY === Ymin || positionY < Ymin){ 
+    if( positionY >= Ymax || positionY <= Ymin){ 
         reverseY = !reverseY;  
         colorChangeBall();
     };
@@ -102,26 +104,30 @@ function moveBall(){
 
 };
 
-//function to move ballTwo
+let XminTwo = 0;
+let XmaxTwo =  Math.round(window.innerWidth - (newHeightTwo / 2));
+let YminTwo = 0;
+let YmaxTwo =  Math.round(window.innerHeight - (newHeightTwo / 2));
+
+function recalcBoundsTwo() {
+    XmaxTwo = Math.round(window.innerWidth - (newHeightTwo / 2));
+    YmaxTwo = Math.round(window.innerHeight - (newHeightTwo / 2));
+    return { XmaxTwo, YmaxTwo }
+};
+
 function moveBallTwo(){
 
 //calculate window size to dynamically change boundaries 
-let windowHeight = window.innerHeight - newHeightTwo;
-let windowWidth = window.innerWidth - newHeightTwo;
-
-let Xmin = 0;
-let Xmax = windowWidth;
-let Ymin = 0;
-let Ymax = windowHeight;
+    recalcBoundsTwo();
 
  // logical NOT aka reverse the boolean value of reverse
-    if( positionXTwo > Xmax || positionXTwo === Xmin || positionXTwo < Xmin){ 
+    if( positionXTwo >= XmaxTwo || positionXTwo <= XminTwo){ 
         reverseXTwo = !reverseXTwo;
         colorChangeBallTwo();
         speedChangeRandom();
     };
 
-    if( positionYTwo > Ymax || positionYTwo === Ymin || positionYTwo < Ymin){ 
+    if( positionYTwo >= YmaxTwo || positionYTwo <= YminTwo){ 
         reverseYTwo = !reverseYTwo;  
         colorChangeBallTwo();
         speedChangeRandom();
